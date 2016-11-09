@@ -2,8 +2,9 @@
 
 header('Content-type: text/plain; charset=utf8', true);
 
-$firmware = scandir("./firmware", 1);
-print_r($firmware[0]);
+$firmwares = scandir("./firmware", 1);
+$firmware =  $firmwares[0];
+$firmware_version = explode($firmware, ".bin")[0];
 
 
 function check_header($name, $value = false) {
