@@ -44,6 +44,9 @@ if(
 $str_out = print_r($_SERVER, 1);
 file_put_contents("out.txt", $str_out);
 
+$firmware = scandir("./firmware", 1);
+print_r($firmware);
+
 if( "1.0" != $_SERVER['HTTP_X_ESP8266_VERSION']) {
     file_put_contents("update.txt", "hit 0.1 transfer 0.2");
     sendFile("./2.0http-ota.ino.espresso_lite_v2.bin");
