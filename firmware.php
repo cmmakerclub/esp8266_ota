@@ -4,7 +4,7 @@ header('Content-type: text/plain; charset=utf8', true);
 
 $firmwares = scandir("./firmware", 1);
 $firmware =  $firmwares[0];
-$firmware_version = explode(".bin", $firmware);
+$firmware_version = explode(".bin", $firmware)[0];
 print_r($firmware_version);
 
 
