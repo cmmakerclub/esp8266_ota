@@ -3,7 +3,7 @@
 header('Content-type: text/plain; charset=utf8', true);
 
 $firmware = scandir("./firmware", 1);
-print_r($firmware);
+print_r($firmware[0]);
 
 
 function check_header($name, $value = false) {
