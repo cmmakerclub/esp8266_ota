@@ -5,6 +5,7 @@ header('Content-type: text/plain; charset=utf8', true);
 $firmwares = scandir("./firmware", 1);
 $firmware =  $firmwares[0];
 $firmware_version = explode($firmware, ".bin")[0];
+print_r($firmware_version);
 
 
 function check_header($name, $value = false) {
