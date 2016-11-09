@@ -21,14 +21,14 @@ function sendFile($path) {
     readfile($path);
 }
 
+$firmware = scandir("./firmware", 1);
+print_r($firmware);
+
 if(!check_header('HTTP_USER_AGENT', 'ESP8266-http-Update')) {
     header($_SERVER["SERVER_PROTOCOL"].' 403 Forbidden', true, 403);
     echo "only for ESP8266 updater!\n";
     exit();
 }
-
-$firmware = scandir("./firmware", 1);
-print_r($firmware);
 
 if(
     !check_header('HTTP_X_ESP8266_STA_MAC') ||
