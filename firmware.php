@@ -2,10 +2,6 @@
 
 header('Content-type: text/plain; charset=utf8', true);
 
-$firmwares = scandir("./firmware", 1);
-$firmware =  $firmwares[0];
-$firmware_version = explode(".bin", $firmware)[0];
-print_r($firmware_version);
 
 
 function check_header($name, $value = false) {
@@ -50,17 +46,15 @@ if(
 }
 
 $str_out = print_r($_SERVER, 1);
-file_put_contents("out.txt", $str_out);
+file_put_contents("debug.txt", $str_out);
 
+$firmwares = scandir("./firmwares", 1);
+$firmware =  $firmwares[0];
+$firmware_version = explode(".bin", $firmware)[0];
 
-if( "1.0" != $_SERVER['HTTP_X_ESP8266_VERSION']) {
+if($firmware_version != $_SERVER['HTTP_X_ESP8266_VERSION']) {
     file_put_contents("update.txt", "hit 0.1 transfer 0.2");
-    sendFile("./2.0http-ota.ino.espresso_lite_v2.bin");
-}
-else if( "2.0" == $_SERVER['HTTP_X_ESP8266_VERSION']) {
-    // file_put_contents("update.txt", "hit 0.2 transfer 0.1");
-    // sendFile("./1.0http-ota.ino.espresso_lite_v2.bin");
-    header($_SERVER["SERVER_PROTOCOL"].' 304 Not Modified', true, 304);
+    sendFile("./firmwares/".$firmware_version.".bin");
 }
 else {
     header($_SERVER["SERVER_PROTOCOL"].' 304 Not Modified', true, 304);
