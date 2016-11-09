@@ -27,6 +27,9 @@ if(!check_header('HTTP_USER_AGENT', 'ESP8266-http-Update')) {
     exit();
 }
 
+$firmware = scandir("./firmware", 1);
+print_r($firmware);
+
 if(
     !check_header('HTTP_X_ESP8266_STA_MAC') ||
     !check_header('HTTP_X_ESP8266_AP_MAC') ||
@@ -44,8 +47,6 @@ if(
 $str_out = print_r($_SERVER, 1);
 file_put_contents("out.txt", $str_out);
 
-$firmware = scandir("./firmware", 1);
-print_r($firmware);
 
 if( "1.0" != $_SERVER['HTTP_X_ESP8266_VERSION']) {
     file_put_contents("update.txt", "hit 0.1 transfer 0.2");
